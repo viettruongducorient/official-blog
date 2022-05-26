@@ -1,37 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
+import Api from "../../api/api"
 
 const Blog = () => {
-  const [blogList, setBlogList] = useState([]);
+  const [data, setData] = useState([]);
+
+  async function getBlogList() {
+    try {
+      const response = await Api.getBlogList();
+      setData(response.data.items);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    fetch("https://api-placeholder.herokuapp.com/api/v2/blogs")
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        setBlogList(data)
-        console.log(blogList)
-      });
+    getBlogList();
   }, []);
-
-  // const getBlogList = async() => {
-  //   fetch("https://api-placeholder.herokuapp.com/api/v2/blogs")
-  //     .then(response => {
-  //       return response.json()
-  //     })
-  //     .then(data => {
-  //       setBlogList(data.data)
-  //       console.log(blogList)
-  //     });
-  // }
 
   return (
     <div>
-      {blogList && blogList.map((index, blog) => {
+      {data.map(blog => {
         return (
-          <ul key={index} className="list-unstyled">
+          <ul key={blog.id} className="list-unstyled">
             <li className="media">
-              <img src="..." className="mr-3" alt="..." />
+              <img src={blog.image.url} style={{width:"200px"}} className="mr-3" alt="..." />
               <div className="media-body">
                 <h5 className="mt-0 mb-1">List-based media object</h5>
                 {blog.content}
@@ -41,19 +33,7 @@ const Blog = () => {
         );
       })}
     </div>
-  );
-  // <ul className="list-unstyled">
-  //   <li className="media">
-  //     <img src="..." className="mr-3" alt="..." />
-  //     <div className="media-body">
-  //       <h5 className="mt-0 mb-1">List-based media object</h5>
-  //       Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-  //       scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-  //       vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-  //       vulputate fringilla. Donec lacinia congue felis in faucibus.
-  //     </div>
-  //   </li>
-  // </ul>
+  )
 }
 
 export default Blog;
