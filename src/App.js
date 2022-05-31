@@ -3,7 +3,7 @@ import React from "react";
 import Search from "./components/Search/index.jsx";
 function App() {
   return (
-    <div className="App pt-10">
+    <div className="App pt-100">
       <header className="App-header">
       </header>
       <div className="container">
