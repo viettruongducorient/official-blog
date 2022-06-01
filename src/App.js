@@ -1,6 +1,7 @@
 import React from "react";
-// import Blog from "./components/Blog/index.jsx"
+import ListBlog from "./components/ListBlog/index.jsx";
 import Search from "./components/Search/index.jsx";
+
 function App() {
   return (
     <div className="App pt-100">
@@ -14,6 +15,7 @@ function App() {
             <Search/>
           </div>
           <div className="col">
+            <ListBlog/>
           </div>
         </div>
       </div>

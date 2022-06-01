@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Api from "../../api/api";
 
-export function Blog() {
+const ListBlog = () => {
   const [data, setData] = useState([]);
 
   async function getBlogList() {
@@ -35,4 +35,4 @@ export function Blog() {
     </div>
   )
 }
-
+export default ListBlog;
